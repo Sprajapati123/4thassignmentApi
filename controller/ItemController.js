@@ -11,6 +11,7 @@ function addItems(req,res,next) {
 
     })
         .then(function (result) {
+            console.log("hey");
             next()
 
         })

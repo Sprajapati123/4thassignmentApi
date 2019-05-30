@@ -8,6 +8,8 @@ var controller = require('./controller/userController')
 
 var itemController = require('./controller/ItemController')
 
+var itemModel = require('./model/itemModel')
+
 var authcontroller = require('./controller/AuthController')
 
 //this is the first middleware - application middleware , all routes hit this middleware first
@@ -15,7 +17,7 @@ app.use(function(req,res,next){
 
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'content-type,X-Requested-With,authorization');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With,Authorization');
     next(); // next passes to another application middleware
 })
 
@@ -37,6 +39,19 @@ app.post('/v1/addItems',itemController.addItems,function (req,res) {
     res.status(203);
     res.send({"message":"Item added"})
 })
+
+app.get('v1/items',function (req,res) {
+    itemModel.Items.findAll({
+        attributes:['item_name','item_price']
+    })
+        .then(function (result) {
+            console.log(result)
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+})
+
 
 app.use(function(err,req,res,next){
 

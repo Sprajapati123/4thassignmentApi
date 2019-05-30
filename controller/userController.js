@@ -30,6 +30,7 @@ function registerUser(req,res,next) {
 
     })
         .then(function (result) {
+            console.log('abc')
            next()
 
         })

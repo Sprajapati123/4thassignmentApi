@@ -13,11 +13,11 @@ function verify(req,res,next){
             if(result != null){
                 next();
             }else{
-                next({"status":409,"message":"Credential didn't match"});
+                next({"status":405,"message":"Credential didn't match"});
             }
         })
         .catch(function(err){
-            next({"status":409 ,"message":err});
+            next({"status":405 ,"message":err});
         })
 }
 
@@ -32,11 +32,11 @@ function check(req,res,next){
                     if(res) {
                         next({"status":200,"message":"Valid User Login."});
                     } else {
-                        next({"status":409,"message":"Credential didn't match."});
+                        next({"status":405,"message":"Credential didn't match."});
                     }
                 });
             }else{
-                next({"status":409,"message":"Credential didn't match."});
+                next({"status":405,"message":"Credential didn't match."});
             }
         })
         .catch(function(err){

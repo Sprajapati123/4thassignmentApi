@@ -23,7 +23,7 @@ $(document).ready(function () {
 			},
 
 			error:function(jqXHR,status) {
-				console.log(jqXHR);
+				$('#message').html(jqXHR.responseJSON.message)
 			}
 		})
 
@@ -56,7 +56,8 @@ $(document).ready(function () {
 
 
 			error:function(jqXHR,status) {
-				console.log(jqXHR);
+				$('#message2').html(jqXHR.responseJSON.message)
+
 			}
 		})
 
@@ -90,9 +91,33 @@ $(document).ready(function () {
 
 
 			error:function(jqXHR,status) {
-				console.log(jqXHR);
+				$('#message3').html(jqXHR.responseJSON.message)
 			}
 		})
 
 	})
+
+
+	$('#getItems').click(function (event) {
+
+
+		$.ajax({
+
+			url:'http://localhost:3000/v1/items',
+			method:'GET',
+			contentType:'application/json',
+			dataType:'json',
+
+			success: function(result,status) {
+				console.log(result)
+			},
+
+
+			error:function(jqXHR,status) {
+				console.log(jqXHR)
+			}
+		})
+
+	})
+
 })
